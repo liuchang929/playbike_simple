@@ -1,0 +1,163 @@
+//
+//  myAccount.m
+//  SmartBicycle
+//
+//  Created by comfouriertech on 14-8-25.
+//  Copyright (c) 2014年 comfouriertech. All rights reserved.
+//
+
+#import "myAccountViewController.h"
+#import "AFNetworking.h"
+#import "CurrentAccount.h"
+
+@interface myAccountViewController () {
+
+    //提示框
+    UIView *_backgroudView;
+    UIActivityIndicatorView *_activityIndicatorView;
+    
+    //当前账户
+    CurrentAccount *_currentAccount;
+}
+
+@end
+
+@implementation myAccount
+
+#pragma mark - lifeCycle
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self initViewData];
+    [self initActivityIndicatorViewWithBackgroud];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+}
+
+#pragma mark - Action
+#pragma mark 按钮点击
+- (IBAction)logout:(UIButton *)sender {
+    
+    if (_currentAccount.guestAccount) {
+        [self performDestinationView];
+    }else{
+        NSString *urlString = @"http://bikeme.duapp.com/Login?type=logout";
+        
+        //有中文，需要转换
+        //    urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSURL *url = [NSURL URLWithString:urlString];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:4.0f];
+        
+        AFJSONRequestOperation *op = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+            NSDictionary *dictionary = JSON;
+            int ret = [[dictionary objectForKey:@"ret"] intValue];
+            /*
+             * return
+             *{“ret”: 1} 注销成功
+             * {“ret”:-2}注销失败
+             */
+            //对服务器返回数据进行判断
+            switch (ret) {
+                case 1:
+                    [self performDestinationView];
+                    [self showAlertWithDelegateWithString:@"注销成功"];
+                    break;
+                case -2:
+                    [self showAlertWithString:@"注销失败"];
+                    break;
+            }
+        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+            [self showAlertWithString:[NSString stringWithFormat:@"%@", error.localizedDescription]];
+        }];
+        [op start];
+    }
+}
+
+#pragma mark 返回
+- (IBAction)back:(UIBarButtonItem *)sender {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    [self presentViewController:(UIViewController *)[storyboard instantiateViewControllerWithIdentifier:@"MainViewController"] animated:YES completion:nil];
+}
+
+#pragma mark - 提示框
+- (void)initActivityIndicatorViewWithBackgroud
+{
+    _backgroudView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 200, 200)];
+    _backgroudView.center = CGPointMake(self.view.bounds.size.height *0.5, self.view.bounds.size.width *0.5);
+    _backgroudView.backgroundColor = [UIColor blackColor];
+    _backgroudView.alpha = 0.5;
+    
+    _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    _activityIndicatorView.center = CGPointMake(_backgroudView.bounds.size.width *0.5, _backgroudView.bounds.size.height *0.5);
+    [_activityIndicatorView startAnimating];
+    
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 150, 100)];
+    label.center =CGPointMake(_backgroudView.bounds.size.width *0.5, 150);
+    label.text = @"注销中";
+    label.font = [UIFont boldSystemFontOfSize:20];
+    label.textAlignment = NSTextAlignmentCenter; //设置文字位置
+    label.adjustsFontSizeToFitWidth = YES;//设置字体大小适应label宽度
+    label.textColor = [UIColor whiteColor];
+    
+    [_backgroudView addSubview:label];
+    [_backgroudView addSubview:_activityIndicatorView];
+}
+#pragma mark - 警告框
+#pragma mark 无代理
+- (void)showAlertWithString:(NSString *)string
+{
+    //首先关闭提示框
+    [_backgroudView removeFromSuperview];
+    
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:string delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alertView show];
+}
+
+#pragma mark 有代理
+- (void)showAlertWithDelegateWithString:(NSString *)string
+{
+    //首先关闭提示框
+    [_backgroudView removeFromSuperview];
+    
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:string delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alertView show];
+}
+
+#pragma mark - 注销后的跳转界面
+- (void)performDestinationView
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    [self presentViewController:(UIViewController *)[storyboard instantiateViewControllerWithIdentifier:@"MiddleViewController"] animated:YES completion:nil];
+}
+
+#pragma mark - 初始化界面UI信息
+- (void)initViewData
+{
+    _currentAccount = [CurrentAccount sharedCurrentAccount];
+    
+    if (_currentAccount.guestAccount) {//游客账户
+        //头像
+        [self.headPhoto setImage:[UIImage imageNamed:@"guest.png"]];
+        
+        //未登录状态下提示语句
+        self.myAccountLabel.text = @"您尚未登录，登录后可同步运动数据到云端";
+        
+        //未登录状态下按钮标题
+        [self.myAccountButton setTitle:@"返回登录界面" forState:UIControlStateNormal];
+        
+    }else{//用户账户
+        
+        //头像
+        NSString *imageName = [NSString stringWithFormat:@"head%02d.png", [_currentAccount.userHeadID intValue]];
+        UIImage *headImage = [UIImage imageNamed:imageName];
+        [self.headPhoto setImage:headImage];
+        
+        //用户名
+        self.myAccountLabel.text = [NSString stringWithFormat:@"我的账户：%@", _currentAccount.userName];
+    }
+}
+
+@end

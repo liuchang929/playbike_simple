@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="方正兰亭纤黑简体_字体文件.ttf">
+            <string>FZLTXHJW--GB1-0</string>
+            <string>FZLTXHJW--GB1-0</string>
+            <string>FZLTXHJW--GB1-0</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="183" id="KGk-i7-Jjw" customClass="MyTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="447" height="183"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="发现更多背景" translatesAutoresizingMaskIntoConstraints="NO" id="8hm-Rr-wSi">
+                        <rect key="frame" x="0.0" y="0.0" width="447" height="37"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="37" id="2m1-lA-TBo"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tqf-fV-vIf">
+                        <rect key="frame" x="18" y="10" width="0.0" height="0.0"/>
+                        <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pB1-BF-Cfa">
+                        <rect key="frame" x="91" y="30" width="0.0" height="0.0"/>
+                        <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="12"/>
+                        <color key="textColor" red="0.60102982954545459" green="0.60102982954545459" blue="0.60102982954545459" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vIF-tg-gfs">
+                        <rect key="frame" x="96" y="30" width="0.0" height="0.0"/>
+                        <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="12"/>
+                        <color key="textColor" red="1" green="0.6331579745" blue="0.2176422401" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q1R-fN-RDL">
+                        <rect key="frame" x="0.0" y="37" width="447" height="145"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </imageView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="Q1R-fN-RDL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="37" id="47K-6D-VZ9"/>
+                    <constraint firstItem="tqf-fV-vIf" firstAttribute="bottom" secondItem="pB1-BF-Cfa" secondAttribute="bottom" id="8Rj-mm-U4a"/>
+                    <constraint firstItem="tqf-fV-vIf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="8kZ-Ud-BKQ"/>
+                    <constraint firstItem="8hm-Rr-wSi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="CD8-Kb-5ii"/>
+                    <constraint firstItem="Q1R-fN-RDL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="GlD-nP-sKO"/>
+                    <constraint firstItem="vIF-tg-gfs" firstAttribute="leading" secondItem="pB1-BF-Cfa" secondAttribute="trailing" constant="5" id="O3z-Ky-5xw"/>
+                    <constraint firstAttribute="bottom" secondItem="Q1R-fN-RDL" secondAttribute="bottom" id="OOc-ei-CKL"/>
+                    <constraint firstItem="8hm-Rr-wSi" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="SlI-ro-K6o"/>
+                    <constraint firstItem="tqf-fV-vIf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="18" id="TIA-Kz-hlu"/>
+                    <constraint firstAttribute="trailing" secondItem="Q1R-fN-RDL" secondAttribute="trailing" id="ZSh-TW-j9d"/>
+                    <constraint firstAttribute="trailing" secondItem="8hm-Rr-wSi" secondAttribute="trailing" id="bph-C8-V5X"/>
+                    <constraint firstItem="pB1-BF-Cfa" firstAttribute="leading" secondItem="tqf-fV-vIf" secondAttribute="trailing" constant="5" id="jR2-uj-gYX"/>
+                    <constraint firstItem="tqf-fV-vIf" firstAttribute="bottom" secondItem="vIF-tg-gfs" secondAttribute="bottom" id="uZY-ly-35w"/>
+                    <constraint firstItem="tqf-fV-vIf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="z1p-o2-otA"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="z1p-o2-otA"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="Image" destination="Q1R-fN-RDL" id="KUk-e6-wk8"/>
+                <outlet property="downState" destination="vIF-tg-gfs" id="fXs-cP-Lni"/>
+                <outlet property="name" destination="tqf-fV-vIf" id="OyC-We-iEV"/>
+                <outlet property="video_desrc1" destination="pB1-BF-Cfa" id="PuX-Lv-J2r"/>
+            </connections>
+            <point key="canvasLocation" x="485.5" y="267.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="发现更多背景" width="750" height="84"/>
+    </resources>
+</document>
