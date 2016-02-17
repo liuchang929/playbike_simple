@@ -19,6 +19,8 @@ static CurrentAccount *sharedCurrentAccountInstance;
         sharedCurrentAccountInstance = [[CurrentAccount alloc] init];
     });
     
+    //设置一些内容
+    
     return sharedCurrentAccountInstance;
 }
 

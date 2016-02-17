@@ -212,9 +212,6 @@
                         [_tbActivityIndicatorView removeFromSuperview];
                         [self showAlertWithString:@"密码中不能包含空格"];
                     }else{
-                        
-                        
-                        
                         NSString *urlString = [NSString stringWithFormat:@"http://%@/Login?type=repassword&username=%@&password=%@&identify=%@",current.serverName,_phoneNum.text, _passWord.text, _varNumTextField.text];
                         NSLog(@"忘记密码url = %@", urlString);
                         //有中文，需要转换
